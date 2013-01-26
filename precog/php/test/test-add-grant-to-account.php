@@ -10,7 +10,7 @@ class AddGrantToAccountTest extends PrecogBaseTest {
         	"grants"=>array(array(
         			"parentIds"=> array(), 
         			"expirationDate"=> null,
-        			"permissions"=>array(array("accessType"=>"read", "path"=>$this->info["path"]."foo/","ownerAccountId"=> $this->info["accountId"]))
+        			"permissions"=>array(array("accessType"=>"read", "path"=>$this->info["path"]."foo/","ownerAccountIds"=> array($this->info["accountId"])))
         		))
         	);
 
@@ -27,6 +27,8 @@ class AddGrantToAccountTest extends PrecogBaseTest {
  		$grantId = $result["grants"][0]["grantId"];
 
  		$result = $api->addGrantToAccount(PrecogBaseTest::$email, PrecogBaseTest::$password, $account2Id, $grantId);
+
+var_dump($result);        
  		$this->assertTrue($result["ok"]);
 
  		$result = PrecogAPI::describeAccount($randomemail, PrecogBaseTest::$password, $account2Id, $this->info["baseUrl"], $this->info["version"]);
